@@ -8,11 +8,7 @@
  *  Based on DM-Cache:
  *   Copyright (C) International Business Machines Corp., 2006
  *   Author: Ming Zhao (mingzhao@ufl.edu)
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> modified codes with astyle and to support linux kernel 4.14
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; under version 2 of the License.
@@ -34,21 +30,12 @@
 #define FLASHCACHE_IOCTL 0xfe
 
 enum {
-<<<<<<< HEAD
-	FLASHCACHEADDNCPID_CMD=200,
-	FLASHCACHEDELNCPID_CMD,
-	FLASHCACHEDELNCALL_CMD,
-	FLASHCACHEADDWHITELIST_CMD,
-	FLASHCACHEDELWHITELIST_CMD,
-	FLASHCACHEDELWHITELISTALL_CMD,
-=======
     FLASHCACHEADDNCPID_CMD=200,
     FLASHCACHEDELNCPID_CMD,
     FLASHCACHEDELNCALL_CMD,
     FLASHCACHEADDWHITELIST_CMD,
     FLASHCACHEDELWHITELIST_CMD,
     FLASHCACHEDELWHITELISTALL_CMD,
->>>>>>> modified codes with astyle and to support linux kernel 4.14
 };
 
 #define FLASHCACHEADDNCPID	_IOW(FLASHCACHE_IOCTL, FLASHCACHEADDNCPID_CMD, pid_t)
@@ -64,26 +51,9 @@ enum {
 #define FLASHCACHEDELALLWHITELIST	_IOW(FLASHCACHE_IOCTL, FLASHCACHEDELWHITELISTALL_CMD, pid_t)
 
 #ifdef __KERNEL__
-<<<<<<< HEAD
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(4,4,0)
 int flashcache_message(struct dm_target *ti, unsigned argc, char **argv);
 int flashcache_prepare_ioctl(struct dm_target *ti,
                              struct block_device **bdev, fmode_t *mode);
-#else
-#if LINUX_VERSION_CODE <= KERNEL_VERSION(2,6,27)
-int flashcache_ioctl(struct dm_target *ti, struct inode *inode,
-		     struct file *filp, unsigned int cmd,
-		     unsigned long arg);
-#else
-int flashcache_ioctl(struct dm_target *ti, unsigned int cmd,
- 		     unsigned long arg);
-#endif
-#endif
-=======
-int flashcache_message(struct dm_target *ti, unsigned argc, char **argv);
-int flashcache_prepare_ioctl(struct dm_target *ti,
-                             struct block_device **bdev, fmode_t *mode);
->>>>>>> modified codes with astyle and to support linux kernel 4.14
 void flashcache_pid_expiry_all_locked(struct cache_c *dmc);
 int flashcache_uncacheable(struct cache_c *dmc, struct bio *bio);
 void seq_io_remove_from_lru(struct cache_c *dmc, struct sequential_io *seqio);

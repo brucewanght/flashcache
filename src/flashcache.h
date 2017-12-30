@@ -329,16 +329,7 @@ struct cache_c {
 	unsigned long	latency_hist_10ms;
 	
 
-<<<<<<< HEAD
-#if LINUX_VERSION_CODE < KERNEL_VERSION(2,6,20)
-	struct work_struct delayed_clean;
-#else
 	struct delayed_work delayed_clean;
-#endif
-
-=======
-	struct delayed_work delayed_clean;
->>>>>>> modified codes with astyle and to support linux kernel 4.14
 	spinlock_t ioctl_lock;	/* XXX- RCU! */
 	unsigned long pid_expire_check;
 
@@ -424,18 +415,8 @@ struct kcached_job {
 	struct cache_c *dmc;
 	struct bio *bio;	/* Original bio */
 	struct job_io_regions {
-<<<<<<< HEAD
-#if LINUX_VERSION_CODE < KERNEL_VERSION(2,6,26)
-		struct io_region disk;
-		struct io_region cache;
-#else
 		struct dm_io_region disk;
 		struct dm_io_region cache;
-#endif
-=======
-		struct dm_io_region disk;
-		struct dm_io_region cache;
->>>>>>> modified codes with astyle and to support linux kernel 4.14
 	} job_io_regions;
 	int    index;
 	int    action;
@@ -464,18 +445,8 @@ struct flashcache_copy_job {
 	struct page **page_base;
 	struct kcached_job **job_base;
 	struct job_io_regions_ {
-<<<<<<< HEAD
-#if LINUX_VERSION_CODE < KERNEL_VERSION(2,6,26)
-		struct io_region disk;
-		struct io_region *cache;
-#else
 		struct dm_io_region disk;
 		struct dm_io_region *cache;
-#endif
-=======
-		struct dm_io_region disk;
-		struct dm_io_region *cache;
->>>>>>> modified codes with astyle and to support linux kernel 4.14
 	} job_io_regions;
 	int error;
 	spinlock_t copy_job_spinlock;
@@ -682,16 +653,7 @@ struct dbn_index_pair {
 /* Inject a 5s delay between syncing blocks and metadata */
 #define FLASHCACHE_SYNC_REMOVE_DELAY		5000
 
-<<<<<<< HEAD
-#if LINUX_VERSION_CODE < KERNEL_VERSION(3,8,0)
-int flashcache_map(struct dm_target *ti, struct bio *bio,
-		   union map_info *map_context);
-#else
 int flashcache_map(struct dm_target *ti, struct bio *bio);
-#endif
-=======
-int flashcache_map(struct dm_target *ti, struct bio *bio);
->>>>>>> modified codes with astyle and to support linux kernel 4.14
 int flashcache_ctr(struct dm_target *ti, unsigned int argc,
 		   char **argv);
 void flashcache_dtr(struct dm_target *ti);
@@ -708,15 +670,7 @@ int flashcache_read_compute_checksum(struct cache_c *dmc, int index, void *block
 #endif
 struct kcached_job *pop(struct list_head *jobs);
 void push(struct list_head *jobs, struct kcached_job *job);
-<<<<<<< HEAD
-#if LINUX_VERSION_CODE < KERNEL_VERSION(2,6,20)
-void do_work(void *unused);
-#else
 void do_work(struct work_struct *unused);
-#endif
-=======
-void do_work(struct work_struct *unused);
->>>>>>> modified codes with astyle and to support linux kernel 4.14
 struct kcached_job *new_kcached_job(struct cache_c *dmc, struct bio* bio,
 				    int index);
 void push_pending(struct kcached_job *job);
@@ -748,43 +702,19 @@ void flashcache_merge_writes(struct cache_c *dmc,
 			     struct dbn_index_pair *writes_list, 
 			     struct dbn_index_pair *set_dirty_list,
 			     int *nr_writes, int set);
-<<<<<<< HEAD
-#if LINUX_VERSION_CODE < KERNEL_VERSION(2,6,26)
-int flashcache_dm_io_sync_vm(struct cache_c *dmc, struct io_region *where, 
-			     int rw, void *data);
-#else
 int flashcache_dm_io_sync_vm(struct cache_c *dmc, struct dm_io_region *where, 
 			     int rw, void *data);
-#endif
-=======
-int flashcache_dm_io_sync_vm(struct cache_c *dmc, struct dm_io_region *where, 
-			     int rw, void *data);
->>>>>>> modified codes with astyle and to support linux kernel 4.14
 void flashcache_update_sync_progress(struct cache_c *dmc);
 void flashcache_enq_pending(struct cache_c *dmc, struct bio* bio,
 			    int index, int action, struct pending_job *job);
 struct pending_job *flashcache_deq_pending(struct cache_c *dmc, int index);
 
-<<<<<<< HEAD
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,22)
-int dm_io_async_bvec(unsigned int num_regions, 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,26)
-		     struct dm_io_region *where, 
-#else
-		     struct io_region *where, 
-#endif
-=======
 int dm_io_async_bvec(unsigned int num_regions, 
 		     struct dm_io_region *where, 
->>>>>>> modified codes with astyle and to support linux kernel 4.14
 		     int rw, 
 		     struct bio *bio,
 		     io_notify_fn fn, 
 		     void *context);
-<<<<<<< HEAD
-#endif
-=======
->>>>>>> modified codes with astyle and to support linux kernel 4.14
 
 void flashcache_detect_fallow(struct cache_c *dmc, int index);
 void flashcache_clear_fallow(struct cache_c *dmc, int index);

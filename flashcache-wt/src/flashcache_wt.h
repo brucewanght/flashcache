@@ -8,11 +8,7 @@
  *  Based on DM-Cache:
  *   Copyright (C) International Business Machines Corp., 2006
  *   Author: Ming Zhao (mingzhao@ufl.edu)
-<<<<<<< HEAD
- * 
-=======
  *
->>>>>>> modified codes with astyle and to support linux kernel 4.14
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; under version 2 of the License.
@@ -80,57 +76,6 @@
  * Cache context
  */
 struct cache_c {
-<<<<<<< HEAD
-	struct dm_target	*tgt;
-	
-	struct dm_dev 		*disk_dev;   /* Source device */
-	struct dm_dev 		*cache_dev; /* Cache device */
-
-	spinlock_t		cache_spin_lock;
-	struct cacheblock	*cache;	/* Hash table for cache blocks */
-	u_int8_t 		*cache_state;
-	u_int32_t		*set_lru_next;
-
-	int			write_around_mode;
-
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,22)
-	struct dm_io_client *io_client; /* Client memory pool*/
-#endif
-	
-	sector_t size;			/* Cache size */
-	unsigned int assoc;		/* Cache associativity */
-	unsigned int block_size;	/* Cache block size */
-	unsigned int block_shift;	/* Cache block size in bits */
-	unsigned int block_mask;	/* Cache block mask */
-	unsigned int consecutive_shift;	/* Consecutive blocks size in bits */
-
-	wait_queue_head_t destroyq;	/* Wait queue for I/O completion */
-	atomic_t nr_jobs;		/* Number of I/O jobs */
-
-	/* Stats */
-	unsigned long reads;		/* Number of reads */
-	unsigned long writes;		/* Number of writes */
-	unsigned long cache_hits;	/* Number of cache hits */
-	unsigned long replace;		/* Number of cache replacements */
-	unsigned long wr_invalidates;	/* Number of write invalidations */
-	unsigned long rd_invalidates;	/* Number of read invalidations */
-	unsigned long cached_blocks;	/* Number of cached blocks */
-
-#ifdef FLASHCACHE_WT_CHECKSUMS
-	unsigned long checksum_store;
-	unsigned long checksum_valid;
-	unsigned long checksum_invalid
-#endif /* FLASHCACHE_WT_CHECKSUMS */
-
-	unsigned long cache_wr_replace;
-	unsigned long uncached_reads;
-	unsigned long uncached_writes;
-	unsigned long cache_reads, cache_writes;
-	unsigned long disk_reads, disk_writes;	
-
-	char cache_devname[DEV_PATHLEN];
-	char disk_devname[DEV_PATHLEN];
-=======
     struct dm_target	*tgt;
 
     struct dm_dev 		*disk_dev;   /* Source device */
@@ -175,40 +120,18 @@ struct cache_c {
 
     char cache_devname[DEV_PATHLEN];
     char disk_devname[DEV_PATHLEN];
->>>>>>> modified codes with astyle and to support linux kernel 4.14
 };
 
 /* Cache block metadata structure */
 struct cacheblock {
-<<<<<<< HEAD
-	sector_t dbn;		/* Sector number of the cached block */
-#ifdef FLASHCACHE_WT_CHECKSUMS
-	u_int64_t checksum;
-=======
     sector_t dbn;		/* Sector number of the cached block */
 #ifdef FLASHCACHE_WT_CHECKSUMS
     u_int64_t checksum;
->>>>>>> modified codes with astyle and to support linux kernel 4.14
 #endif /* FLASHCACHE_WT_CHECKSUMS */
 };
 
 /* Structure for a kcached job */
 struct kcached_job {
-<<<<<<< HEAD
-	struct list_head list;
-	struct cache_c *dmc;
-	struct bio *bio;	/* Original bio */
-#if LINUX_VERSION_CODE < KERNEL_VERSION(2,6,26)
-	struct io_region disk;
-	struct io_region cache;
-#else
-	struct dm_io_region disk;
-	struct dm_io_region cache;
-#endif
-	int    index;
-	int rw;
-	int error;
-=======
     struct list_head list;
     struct cache_c *dmc;
     struct bio *bio;	/* Original bio */
@@ -217,7 +140,6 @@ struct kcached_job {
     int    index;
     int rw;
     int error;
->>>>>>> modified codes with astyle and to support linux kernel 4.14
 };
 
 #define FLASHCACHE_WT_MIN_JOBS 1024
